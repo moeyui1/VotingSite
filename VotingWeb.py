@@ -1,7 +1,5 @@
-import json
-
-from flask import Flask, Response, request, abort, jsonify, render_template,redirect,url_for
 import pymysql
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
@@ -118,6 +116,6 @@ def connect_db():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
     # valid('4c97')
     # get_name_list()
