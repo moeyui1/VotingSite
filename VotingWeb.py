@@ -3,7 +3,6 @@ import smtplib
 from email.mime.text import MIMEText
 import pymysql
 from flask import Flask, request, jsonify, render_template
-import requests
 
 app = Flask(__name__)
 
@@ -137,6 +136,7 @@ def connect_db():
 
 
 if __name__ == '__main__':
+
     app.run()
     # valid('4c97')
     # get_name_list()
