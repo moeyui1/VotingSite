@@ -1,7 +1,4 @@
-/**
- * Created by moeyui on 2016/10/4 0004.
- */
-var URL = 'http://localhost:5000'
+
 
 class Header extends React.Component {
     render() {
@@ -49,7 +46,7 @@ class Root extends React.Component {
 
     load_name_list() {
         $.ajax({
-            url: URL + '/name_list',
+            url: '/name_list',
             cache: false,
             method:'POST',
             success: (data) => {
