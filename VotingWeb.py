@@ -1,3 +1,5 @@
+# coding:utf-8
+
 import pymysql
 from flask import Flask, request, jsonify, render_template
 
