@@ -1,9 +1,8 @@
-
-
 class Header extends React.Component {
     render() {
         return (
             <nav className="navbar navbar-default navbar-fixed-top" role="navigation">
+
                 <div className="container-fluid">
                     {/*<!-- Brand and toggle get grouped for better mobile display -->*/}
                     <div className="navbar-header">
@@ -18,7 +17,7 @@ class Header extends React.Component {
                     </div>
                     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul className="nav navbar-nav navbar-right">
-                            <li><a href="#">联系我们</a></li>
+                            <li><a data-toggle="modal" href="#feedback">联系我们</a></li>
                         </ul>
                     </div>
                 </div>
@@ -48,7 +47,7 @@ class Root extends React.Component {
         $.ajax({
             url: '/name_list',
             cache: false,
-            method:'POST',
+            method: 'POST',
             success: (data) => {
                 this.setState({cell_list: data['list']})
             },
@@ -86,9 +85,14 @@ class InfoPanel extends React.Component {
         });
         // console.log(id_list)
         if (id_list.length == 0)
-            alert('没有选择任何智库，确定提交？');
-        //todo
+            $('#confirm').modal('toggle');
+        else
+            this.submitdata(id_list);
 
+
+    }
+
+    submitdata(id_list) {
         $.ajax({
             url: '/submit',
             data: {'code': this.state.code, 'list': id_list},
@@ -120,6 +124,31 @@ class InfoPanel extends React.Component {
     render() {
         return (
             <div className="col-md-4">
+                {/*模态框*/}
+
+                <div id="confirm" className="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+                     aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div className="modal-dialog modal-sm">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <button type="button" className="close" data-dismiss="modal"><span
+                                    aria-hidden="true">&times;</span><span className="sr-only">Close</span></button>
+                                <h4 className="modal-title">提示</h4>
+                            </div>
+                            <div className="modal-body">
+                                <p>没有选中任何智库，确定提交？</p>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" className="btn btn-primary" data-dismiss="modal"
+                                        onClick={()=>this.submitdata([])}>确定
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/*end模态框*/}
+
                 <div className="panel panel-default">
                     <div className="panel-body">
                         <form rule="form" action="">
@@ -128,7 +157,8 @@ class InfoPanel extends React.Component {
                                 <input type="text" value={this.state.code} className="form-control" id="code"
                                        placeholder="请输入邮件中的邀请码" onChange={this.handleTextChange} required/>
                             </div>
-                            <button type="submit" className="btn btn-default" onClick={this.handleSubmit}>提交</button>
+                            <button type="submit" className="btn btn-default" onClick={this.handleSubmit}>提交
+                            </button>
                             {this.state.hint}
                         </form>
                     </div>
@@ -217,6 +247,37 @@ class TableFrame extends React.Component {
 
 ReactDOM.render(
     <div>
+        {/*反馈模态框*/}
+        <div id="feedback" className="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+             aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div className="modal-dialog modal-lg">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <button type="button" className="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span className="sr-only">Close</span></button>
+                        <h4 className="modal-title">反馈</h4>
+                    </div>
+                    <div className="modal-body">
+                        <form role="form" action="/feedback" id="feedback_form" method="POST">
+                            <input className="form-control" type="text" placeholder="您的邀请码（可选）" name="code"
+                                   style={{margin: '0 0  10px 0'}}/>
+                            <input className="form-control" type="email" placeholder="您的邮箱（可选）" name="email"
+                                   style={{margin: '0 0  10px 0'}}/>
+                            <textarea className="form-control" rows="3" required="required" placeholder="您遇到的问题..."
+                                      name="problem" style={{margin: '0 0 10px 0'}}/>
+                            <div className="row">
+                                <button type="button" className="btn btn-default col-md-offset-10"
+                                        data-dismiss="modal">取消
+                                </button>
+                                <button type="submit" className="btn btn-primary " style={{'margin-left': '10px'}}>提交
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {/*end模态框*/}
         <Header/>
         <Root/>
     </div>, document.getElementById('app')

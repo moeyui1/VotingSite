@@ -1,7 +1,9 @@
 # coding:utf-8
-
+import smtplib
+from email.mime.text import MIMEText
 import pymysql
 from flask import Flask, request, jsonify, render_template
+import requests
 
 app = Flask(__name__)
 
@@ -13,10 +15,9 @@ def hello_world():
 
 @app.route('/submit', methods=['POST', 'GET'])
 def submit():
-    selected_list=[]
+    selected_list = []
     try:
         selected_list = request.form.getlist('list')
-        print(selected_list)
     except Exception as e:
         print(e)
     code = request.form['code']
@@ -43,8 +44,7 @@ def login():
     if result is not None:
         return render_template('index.html')
     else:
-        return render_template('welcome.html',invalid=True)
-
+        return render_template('welcome.html', invalid=True)
 
 
 @app.route('/name_list', methods=['POST'])
@@ -59,13 +59,32 @@ def get_name_list():
             cursor.execute(sql)
             re = cursor.fetchall()
             data['list'] = re
-            # print(data)
     except:
         print("error in database")
         db.rollback()
     finally:
         db.close()
     return jsonify(data)
+
+
+@app.route("/feedback", methods=['POST'])
+def feedback():
+    send_simple_message(request.form['code'],request.form['email'],request.form['problem'])
+    return "谢谢您的反馈<p><a href='/'>点此跳转到首页</a></p>"
+
+
+def send_simple_message(code,email,content):
+    msg = MIMEText("邀请码："+code+"\n邮箱："+email+"\n内容:"+content)
+    msg['Subject'] = "voting feedback"
+    msg['From'] = "voting@mail2.moeyuiss.tk"
+    msg['To'] = "immyk@qq.com"
+
+    s = smtplib.SMTP('email-smtp.us-west-2.amazonaws.com', 587)
+    s.starttls()
+
+    s.login('AKIAIUTU6E3FMDDMYEJQ', 'AupIgJtqWOii+a4Ex88rRsBddngEtyehoB+gcSE5MLQw')
+    s.sendmail(msg['From'], msg['To'], msg.as_string())
+    s.quit()
 
 
 def valid(code):
@@ -100,14 +119,14 @@ def handleVoting(list):
     try:
         with db.cursor() as c:
             for i in iter(list):
-                i=int(i) # ajax提交过来的是字符串
+                i = int(i)  # ajax提交过来的是字符串
                 c.execute(presql % i)
                 num = c.fetchone()[0]
                 num += 1
                 c.execute(sql % (num, i))
         db.commit()
     except Exception as e:
-        print("Error: unable to fecth data",e)
+        print("Error: unable to fecth data", e)
         db.rollback()
     finally:
         db.close()
