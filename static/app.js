@@ -92,6 +92,10 @@ class InfoPanel extends React.Component {
 
     }
 
+    componentDidUpdate(){
+        $(".alert").fadeIn('slow');
+        setTimeout("$('.alert').fadeOut('slow')",5000)
+    }
     submitdata(id_list) {
         $.ajax({
             url: '/submit',
@@ -99,7 +103,6 @@ class InfoPanel extends React.Component {
             traditional: true,
             type: "POST",
             success: (data) => {
-                console.log(data);
                 if (data['success'])
                     this.setState({
                         hint: <div className="alert alert-success" role="alert" style={{margin: '10px 0 0 0'}}>
@@ -107,9 +110,10 @@ class InfoPanel extends React.Component {
                     });
                 else
                     this.setState({
-                        hint: <div className="alert alert-danger" role="alert" style={{margin: '10px 0 0 0'}}>
+                        hint: <div className="alert alert-danger" role="alert" style={{margin: '10px 0 0 0',display:'none'}}>
                             提交失败！邀请码无效或已经投过票了</div>
                     })
+                setTimeout("")
             },
             error: (xhr, status, err) =>
                 console.error(url, status, err.toString())
