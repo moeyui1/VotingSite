@@ -8,7 +8,23 @@
     <script src="//cdn.bootcss.com/react/15.3.2/react.min.js"></script>
     <script src="//cdn.bootcss.com/react/15.3.2/react-dom.min.js"></script>
     <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
-
+    <link rel="apple-touch-icon" sizes="57x57" href="/static/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/static/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/static/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/static/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/static/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/static/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/static/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/static/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/static/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/static/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
 </head>
 <body>
 <style>
@@ -45,15 +61,34 @@
         overflow: auto;
         overflow-y: visible;
     }
-    #amount{
+
+    #amount {
         color: green;
     }
-    #feedback_form{
+
+    #feedback_form {
 
     }
 </style>
 <div id="app"></div>
 <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/babel" src="/static/app.js"></script>
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-75483578-2', 'auto');
+    ga('send', 'pageview');
+
+</script>
 </body>
 </html>

@@ -136,7 +136,5 @@ def connect_db():
 
 
 if __name__ == '__main__':
-
     app.run()
-    # valid('4c97')
-    # get_name_list()
+
