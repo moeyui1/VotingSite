@@ -266,7 +266,7 @@ ReactDOM.render(
                             <textarea className="form-control" rows="3" required="required" placeholder="您遇到的问题..."
                                       name="problem" style={{margin: '0 0 10px 0'}}/>
                             <div className="row">
-                                <button type="button" className="btn btn-default col-md-offset-10"
+                                <button type="button" className="btn btn-default col-md-offset-10 col-xs-offset-9"
                                         data-dismiss="modal">取消
                                 </button>
                                 <button type="submit" className="btn btn-primary " style={{'margin-left': '10px'}}>提交
