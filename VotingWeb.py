@@ -22,7 +22,7 @@ def submit():
     except Exception as e:
         print(e)
     code = request.form['code']
-    result = d.valid(code)
+    result = d.valid(code,True)
     rsp = {
         'success': False,
         'hasVoted': False
@@ -42,7 +42,7 @@ def submit():
 def login():
     d=DB()
     code = request.form['code']
-    result = d.valid(code)
+    result = d.valid(code,False)
     if result is not None:
         return render_template('index.html')
     else:

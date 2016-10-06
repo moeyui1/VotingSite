@@ -43,7 +43,7 @@ class DB:
         finally:
             db.close()
 
-    def valid(self, code):
+    def valid(self, code,is_voting):
         db = self.__connect_db()
 
         sql = "select `ID`,`has_voted` from `random_code` where `CODE` = '%s'" % code
@@ -55,7 +55,7 @@ class DB:
                     return None  # Not Founded
                 else:
                     state = result[1]  # 投票状态
-                    if state == 0:
+                    if state == 0 and is_voting:
                         #   设为已投票
                         cursor.execute('update random_code set has_voted=1 where code="%s"' % code)
                         db.commit()
@@ -65,6 +65,7 @@ class DB:
             db.rollback()
         finally:
             db.close()
+
 
     # def get_zhiku_by_type(self, type, type_list):
     #     db = self.__connect_db()
