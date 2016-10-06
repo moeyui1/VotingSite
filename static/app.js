@@ -13,11 +13,18 @@ class Header extends React.Component {
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        <a className="navbar-brand" href="/">首批CTTI来源智库评审投票系统</a>
+                        <a className="navbar-brand" href="/"><strong id="title">首批CTTI来源智库评审投票系统</strong></a>
                     </div>
                     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul className="nav navbar-nav">
+                            <li><a href="#sheet0">国家党政军、科研院所智库</a></li>
+                            <li><a href="#sheet1">地方智库</a></li>
+                            <li><a href="#sheet2">高校智库</a></li>
+                            <li><a href="#sheet3">社会、媒体智库</a></li>
+
+                        </ul>
                         <ul className="nav navbar-nav navbar-right">
-                            <li><a data-toggle="modal" href="#feedback">联系我们</a></li>
+                            <li><a data-toggle="modal" href="#feedback">遇到问题？</a></li>
                         </ul>
                     </div>
                 </div>
@@ -45,7 +52,8 @@ class Root extends React.Component {
     }
 
     componentDidMount() {
-        this.load_name_list()
+        this.load_name_list();
+        // $('#table-panel').scrollspy({target: '.navbar-example'})
     }
 
     load_name_list() {
@@ -119,8 +127,7 @@ class InfoPanel extends React.Component {
                         hint: <div className="alert alert-danger" role="alert"
                                    style={{margin: '10px 0 0 0', display: 'none'}}>
                             提交失败！邀请码无效或已经投过票了</div>
-                    })
-                setTimeout("")
+                    });
             },
             error: (xhr, status, err) =>
                 console.error(url, status, err.toString())
@@ -208,12 +215,18 @@ class TableFrame extends React.Component {
         }
     }
 
+    componentDidUpdate() {
+        // $('[data-spy="scroll"]').each(function () {
+        //     var $spy = $(this).scrollspy('refresh')
+        // })
+    }
+
     render() {
         var tablelist = [];
-        this.props.list.map((value)=> {
+        this.props.list.map((value, i)=> {
             tablelist.push(
                 <tr>
-                    <th colSpan="3" className="text-center">{value['type']}</th>
+                    <th colSpan="3" className="text-center" id={"sheet" + i}>{value['type']}</th>
                 </tr>
             );
             value['items'].map((itemvalue)=> {
@@ -240,7 +253,7 @@ class TableFrame extends React.Component {
                         beatae, neque maxime.
                     </div>
                 </div>
-                <div id="table-panel">
+                <div id="table-panel" data-spy="scroll" data-target=".navbar-collapse">
 
                     <div className="panel panel-default">
                         <div className="panel-heading">智库列表</div>
