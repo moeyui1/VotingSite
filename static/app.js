@@ -13,7 +13,7 @@ class Header extends React.Component {
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        <a className="navbar-brand" href="/">投票</a>
+                        <a className="navbar-brand" href="/">首批CTTI来源智库评审投票系统</a>
                     </div>
                     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul className="nav navbar-nav navbar-right">
@@ -28,7 +28,12 @@ class Header extends React.Component {
 class Root extends React.Component {
     constructor() {
         super();
-        this.state = {selected_num: 0, cell_list: []}
+        this.state = {
+            selected_num: 0, cell_list: {
+                'list': [],
+                'amount': 0
+            }
+        }
     }
 
     dec_selected_num() {
@@ -49,7 +54,7 @@ class Root extends React.Component {
             cache: false,
             method: 'POST',
             success: (data) => {
-                this.setState({cell_list: data['list']})
+                this.setState({cell_list: data})
             },
             error: (xhr, status, err) =>
                 console.error(url, status, err.toString())
@@ -59,9 +64,9 @@ class Root extends React.Component {
     render() {
         return (
             <div className="container">
-                <TableFrame list={this.state.cell_list} inc={this.inc_selected_num.bind(this)}
+                <TableFrame list={this.state.cell_list['list']} inc={this.inc_selected_num.bind(this)}
                             dec={this.dec_selected_num.bind(this)}/>
-                <InfoPanel snum={this.state.selected_num} amount={this.state.cell_list.length}/>
+                <InfoPanel snum={this.state.selected_num} amount={this.state.cell_list['amount']}/>
             </div>
         )
     }
@@ -92,10 +97,11 @@ class InfoPanel extends React.Component {
 
     }
 
-    componentDidUpdate(){
+    componentDidUpdate() {
         $(".alert").fadeIn('slow');
-        setTimeout("$('.alert').fadeOut('slow')",5000)
+        setTimeout("$('.alert').fadeOut('slow')", 5000)
     }
+
     submitdata(id_list) {
         $.ajax({
             url: '/submit',
@@ -110,7 +116,8 @@ class InfoPanel extends React.Component {
                     });
                 else
                     this.setState({
-                        hint: <div className="alert alert-danger" role="alert" style={{margin: '10px 0 0 0',display:'none'}}>
+                        hint: <div className="alert alert-danger" role="alert"
+                                   style={{margin: '10px 0 0 0', display: 'none'}}>
                             提交失败！邀请码无效或已经投过票了</div>
                     })
                 setTimeout("")
@@ -189,7 +196,7 @@ class TableFrame extends React.Component {
     }
 
     handleClick(e) {
-        var $cell = $(e.currentTarget)
+        var $cell = $(e.currentTarget);
         if ($cell.hasClass('info')) {
             $cell.removeClass('info');
             $cell.children('td').children('input').prop('checked', false);
@@ -202,15 +209,22 @@ class TableFrame extends React.Component {
     }
 
     render() {
-        let tablelist = [];
+        var tablelist = [];
         this.props.list.map((value)=> {
             tablelist.push(
-                <tr onClick={this.handleClick}>
-                    <td>{value[0]}</td>
-                    <td>{value[1]}</td>
-                    <td className="text-center"><input type="checkbox"/></td>
+                <tr>
+                    <th colSpan="3" className="text-center">{value['type']}</th>
                 </tr>
-            )
+            );
+            value['items'].map((itemvalue)=> {
+                tablelist.push(
+                    <tr onClick={this.handleClick}>
+                        <td>{itemvalue[0]}</td>
+                        <td>{itemvalue[1]}</td>
+                        <td className="text-center"><input type="checkbox"/></td>
+                    </tr>
+                )
+            })
         });
         return (
             <div className="col-md-8">
