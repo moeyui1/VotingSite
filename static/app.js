@@ -247,7 +247,7 @@ class TableFrame extends React.Component {
                         <h3 className=" panel-title">投票说明：</h3>
                     </div>
                     <div className=" panel-body">
-                        <p style={{'font-size': '16px'}}>
+                        <p style={{'font-size': '15px'}}>
                             以下智库列表是经过各省市宣传部理论处、哲社规划办、教育部直属高校社科处等有关机构的推荐，最终整理形成的514家智库名单。请您在仔细阅览后，至少选出50家表示
                             <strong className="warning-text">否决</strong>
                             的智库（即被否决的智库数量大于等于50），并对所选智库投<strong className="warning-text">否决票</strong>（勾选即可）。
