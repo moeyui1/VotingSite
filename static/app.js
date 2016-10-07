@@ -248,9 +248,14 @@ class TableFrame extends React.Component {
                     </div>
                     <div className=" panel-body">
                         <p style={{'font-size': '15px'}}>
-                            以下智库列表是经过各省市宣传部理论处、哲社规划办、教育部直属高校社科处等有关机构的推荐，最终整理形成的514家智库名单。请您在仔细阅览后，至少选出50家表示
-                            <strong className="warning-text">否决</strong>
-                            的智库（即被否决的智库数量大于等于50），并对所选智库投<strong className="warning-text">否决票</strong>（勾选即可）。
+                            以下智库列表是经过各省市宣传部理论处、哲社规划办、教育部直属高校社科处等有关机构的推荐，最终整理形成的514家智库名单。请您在仔细阅览后，至少选出50家您认为
+                            <strong className="warning-text">不属于</strong>
+                            智库的机构（即被否决的智库数量大于等于50），并对所选智库投<strong className="warning-text">否决票</strong>（勾选即可）。
+                            <p>
+                               <strong style={{'text-decoration':'underline'}}>
+                                   需要注意：投票过程需一次性完成，投票完成后请务必点击右侧提交按钮进行提交，否则投票结果视为无效。一旦选择提交，则无法进行二次投票。
+                               </strong>
+                            </p>
                         </p></div>
                 </div>
                 <div id="table-panel">
