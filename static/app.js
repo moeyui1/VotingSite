@@ -246,8 +246,8 @@ class TableFrame extends React.Component {
                         <h3 className=" panel-title">注意：</h3>
                     </div>
                     <div className=" panel-body">
-                        <p style={{'text-indent': '2em'}}>
-                            以下为本次遴选的所有智库名单，请您在仔细阅读后，在非智库机构后勾选。
+                        <p style={{'font-size':'16px'}}>
+                            以下为本次遴选的所有智库名单，请您在仔细阅读后勾选出非智库机构。
                         </p></div>
                 </div>
                 <div id="table-panel" data-spy="scroll" data-target=".navbar-collapse">
