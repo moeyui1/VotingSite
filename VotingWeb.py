@@ -99,7 +99,7 @@ def get_name_list():
 @app.route("/feedback", methods=['POST'])
 def feedback():
     send_simple_message(request.form['code'], request.form['email'], request.form['problem'])
-    return "谢谢您的反馈<p><a href='/'>点此跳转到首页</a></p>"
+    return "谢谢您的反馈，我们会尽快处理！<p><a href='/'>点此跳转到首页</a></p>"
 
 
 def send_simple_message(code, email, content):

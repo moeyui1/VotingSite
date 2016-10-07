@@ -246,12 +246,10 @@ class TableFrame extends React.Component {
                         <h3 className=" panel-title">注意：</h3>
                     </div>
                     <div className=" panel-body">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus nam nemo alias temporibus,
-                        natus
-                        veniam labore necessitatibus. Consectetur, in illum culpa fugit magnam atque cupiditate quo
-                        reiciendis
-                        beatae, neque maxime.
-                    </div>
+                        尊敬的评审专家：<br/>
+                        <p style={{'text-indent': '2em'}}>
+                            以下为本次遴选的所有智库名单，请您在仔细阅读后，在非智库机构后勾选。
+                        </p></div>
                 </div>
                 <div id="table-panel" data-spy="scroll" data-target=".navbar-collapse">
 
