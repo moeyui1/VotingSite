@@ -253,7 +253,7 @@ class TableFrame extends React.Component {
                             智库的机构（即被否决的智库数量大于等于50），并对所选智库投<strong className="warning-text">否决票</strong>（勾选即可）。
                             <p>
                                <strong style={{'text-decoration':'underline'}}>
-                                   需要注意：投票过程需一次性完成，投票完成后请务必点击右侧提交按钮进行提交，否则投票结果视为无效。一旦选择提交，则无法进行二次投票。
+                                   需要注意：投票过程需一次性完成，投票完成后请务必点击“提交”按钮进行提交，否则投票结果视为无效。一旦选择提交，则无法进行二次投票。
                                </strong>
                             </p>
                         </p></div>
