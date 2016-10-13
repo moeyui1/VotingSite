@@ -87,7 +87,8 @@ class InfoPanel extends React.Component {
         super();
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleTextChange = this.handleTextChange.bind(this);
-        this.state = {code: '', hint: null}
+        this.state = {code: '', hint: false}
+        this.hint = null
     }
 
     handleSubmit(e) {
@@ -105,7 +106,7 @@ class InfoPanel extends React.Component {
 
     }
 
-    componentDidUpdate() {
+    icomponentDidUpdate() {
         $(".alert").fadeIn('slow');
         setTimeout("$('.alert').fadeOut('slow')", 5000)
     }
@@ -117,17 +118,26 @@ class InfoPanel extends React.Component {
             traditional: true,
             type: "POST",
             success: (data) => {
-                if (data['success'])
-                    this.setState({
-                        hint: <div className="alert alert-success" role="alert" style={{margin: '10px 0 0 0'}}>
-                            提交成功！</div>
-                    });
-                else
-                    this.setState({
-                        hint: <div className="alert alert-danger" role="alert"
+                if (data['success']) {
+                    // this.setState({
+                    //     hint: <div className="alert alert-success" role="alert" style={{margin: '10px 0 0 0'}}>
+                    //         提交成功！</div>
+                    // });
+                    this.hint = <div className="alert alert-success" role="alert" style={{margin: '10px 0 0 0'}}>
+                        提交成功！</div>
+                }
+                else {
+                    // this.setState({
+                    //     hint: <div className="alert alert-danger" role="alert"
+                    //                style={{margin: '10px 0 0 0', display: 'none'}}>
+                    //         提交失败！邀请码无效或已经投过票了</div>
+                    // });
+                    this.hint=<div className="alert alert-danger" role="alert"
                                    style={{margin: '10px 0 0 0', display: 'none'}}>
                             提交失败！邀请码无效或已经投过票了</div>
-                    });
+                }
+                this.setState({hint:!this.state.hint})
+                this.icomponentDidUpdate()
             },
             error: (xhr, status, err) =>
                 console.error(url, status, err.toString())
@@ -177,7 +187,7 @@ class InfoPanel extends React.Component {
                             </div>
                             <button type="submit" className="btn btn-default" onClick={this.handleSubmit}>提交
                             </button>
-                            {this.state.hint}
+                            {this.hint}
                         </form>
                     </div>
                 </div>
@@ -252,11 +262,12 @@ class TableFrame extends React.Component {
                             <strong className="warning-text">否决</strong>
                             50家智库（即被否决的智库数量大于或等于50），并对所选智库投<strong className="warning-text">否决票</strong>（勾选即可）。
                             <p>
-                               <strong style={{'text-decoration':'underline'}}>
-                                   需要注意：投票过程需一次性完成，投票完成后请务必点击“提交”按钮进行提交，否则投票结果视为无效。您一旦选择提交，则无法进行二次投票。
-                               </strong>
+                                <strong style={{'text-decoration': 'underline'}}>
+                                    需要注意：投票过程需一次性完成，投票完成后请务必点击“提交”按钮进行提交，否则投票结果视为无效。您一旦选择提交，则无法进行二次投票。
+                                </strong>
                             </p>
-                        </p></div>
+                        </p>
+                    </div>
                 </div>
                 <div id="table-panel">
 
