@@ -111,7 +111,8 @@ def send_simple_message(code, email, content):
     s = smtplib.SMTP('email-smtp.us-west-2.amazonaws.com', 587)
     s.starttls()
 
-    s.login('AKIAIUTU6E3FMDDMYEJQ', 'AupIgJtqWOii+a4Ex88rRsBddngEtyehoB+gcSE5MLQw')
+    # 使用登录凭证
+    s.login('', '+a4Ex88rRsBddngEtyehoB+gcSE5MLQw') 
     s.sendmail(msg['From'], msg['To'], msg.as_string())
     s.quit()
 
